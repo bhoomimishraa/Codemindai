@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeMind AI</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f5f6fa;--sf:#fff;--tx:#1b1f2a;--mu:#6b7280;--bd:#e1e4ec;--ac:#5560f0;--ac2:#eceeff;--ok:#16a34a;--wa:#d97706;--er:#dc2626;--cd:#f0f1f6}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0e1016;--sf:#171a23;--tx:#e8eaf2;--mu:#8b92a5;--bd:#2a2e3b;--ac:#7c86ff;--ac2:#232743;--cd:#0e1016}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0e1016;--sf:#171a23;--tx:#e8eaf2;--mu:#8b92a5;--bd:#2a2e3b;--ac:#7c86ff;--ac2:#232743;--cd:#0e1016}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:7px 14px;cursor:pointer}
+button.g{background:var(--sf);color:var(--tx);border:1px solid var(--bd)}button.d{background:var(--er)}button:disabled{opacity:.5}
+input,select,textarea{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;width:100%}
+label{display:block;margin:10px 0 4px;color:var(--mu);font-size:12px}
+.app{display:flex;min-height:100vh}nav{width:210px;flex:none;background:var(--sf);border-right:1px solid var(--bd);padding:14px 10px;position:sticky;top:0;height:100vh;overflow:auto}
+nav h1{font-size:16px;margin:0 6px 2px}nav small{color:var(--mu);margin:0 6px 12px;display:block}
+nav a{display:flex;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--tx)}nav a:hover{background:var(--cd)}nav a.on{background:var(--ac2);color:var(--ac);font-weight:600}
+main{flex:1;min-width:0;padding:20px;max-width:1100px}
+h2{margin:0 0 4px}.sub{color:var(--mu);margin:0 0 16px}.mu{color:var(--mu)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:none}.grow{flex:1!important;min-width:140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi b{display:block;font-size:26px}.kpi span{color:var(--mu);font-size:12px}
+.out{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:12px;min-height:80px;overflow-x:auto;margin-top:10px;line-height:1.6}
+pre{background:var(--cd);border:1px solid var(--bd);border-radius:8px;padding:10px;overflow-x:auto;font:12.5px/1.5 ui-monospace,Menlo,monospace;margin:8px 0}
+code{font-family:ui-monospace,Menlo,monospace;background:var(--cd);padding:1px 5px;border-radius:4px}
+.ed{display:flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:var(--sf);height:420px}
+.ln{padding:10px 8px;text-align:right;color:var(--mu);background:var(--cd);font:13px/1.5 ui-monospace,Menlo,monospace;user-select:none;overflow:hidden;white-space:pre}
+.ed textarea{border:0;border-radius:0;resize:none;height:100%;font:13px/1.5 ui-monospace,Menlo,monospace;white-space:pre;overflow:auto;outline:0;tab-size:2}
+.tag{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;background:var(--ac2);color:var(--ac)}
+.ok{color:var(--ok)}.wa{color:var(--wa)}.er{color:var(--er)}
+.sc{overflow-x:auto}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd)}
+.auth{max-width:400px;margin:8vh auto;padding:0 16px}.tabs{display:flex;gap:6px;margin-bottom:8px}
+.fl{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;margin:6px 0;gap:8px}
+.fl.on{border-color:var(--ac);background:var(--ac2)}
+.hero{position:relative;display:flex;align-items:center;min-height:96px;border-radius:16px;padding:18px 22px;margin-bottom:18px;color:#fff;overflow:hidden;background:linear-gradient(120deg,#5560f0,#8b5cf6 60%,#ec4899)}
+.hero h2{margin:0;color:#fff}.hero .sub{color:#ffffffd0;margin:2px 0 0;max-width:60%}
+.hero svg{position:absolute;right:0;top:0;height:100%;width:50%;opacity:.95;pointer-events:none}
+.authart{display:block;width:100%;border-radius:12px;margin-bottom:12px}
+.kc{position:relative;overflow:hidden;border-radius:14px;padding:14px 16px;color:#fff;box-shadow:0 6px 18px #0002}
+.kc b{display:block;font-size:28px;line-height:1.1}.kc span{font-size:12px;opacity:.9}.kc i{position:absolute;right:10px;top:6px;font-style:normal;font-size:34px;opacity:.28}
+.leg{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:8px;font-size:12px}.leg em{font-style:normal;display:inline-flex;align-items:center;gap:5px}.leg em:before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.pb{height:10px;border-radius:99px;background:var(--cd);overflow:hidden}.pb div{height:100%;border-radius:99px;transition:width .8s}
+.frow{display:grid;grid-template-columns:130px 1fr 70px;gap:10px;align-items:center;margin:9px 0;font-size:13px}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.fl2{animation:fl 5s ease-in-out infinite}
+@media(max-width:760px){.app{flex-direction:column}nav{width:100%;height:auto;position:static;display:flex;flex-wrap:wrap;gap:4px}nav h1,nav small{width:100%}main{padding:14px}.ed{height:340px}.hero .sub{max-width:100%}.hero svg{opacity:.35}.frow{grid-template-columns:90px 1fr 56px}}
+</style></head><body><div id="root"></div>
+<script>
+const $=(s,e=document)=>e.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const mem={};const LS={get(k,d){if(k in mem)return mem[k];try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const uid=()=>Math.random().toString(36).slice(2,9);
+async function sha(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return String(h)}}
+function md(t){return t.split(/```/).map((p,i)=>{if(i%2)return'<pre>'+esc(p.replace(/^[^\n]*\n/,''))+'</pre>';return esc(p).replace(/^### (.*)$/gm,'<h4>$1</h4>').replace(/^## (.*)$/gm,'<h3>$1</h3>').replace(/^# (.*)$/gm,'<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/^[-*] (.*)$/gm,'• $1').replace(/\n/g,'<br>')}).join('')}
+const SAMPLE=`// Sample: shopping cart utilities
+function total(items){
+  var sum = 0;
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].qty > 0 && items[i].price != null) {
+      sum += items[i].qty * items[i].price;
+    }
+  }
+  return sum;
+}
+
+const applyDiscount = (amount, code) => {
+  if (code == 'SAVE10') return amount * 0.9;
+  else if (code === 'SAVE20') return amount * 0.8;
+  return amount;
+};
+
+console.log(total([{qty:2,price:5},{qty:1,price:10}]));
+console.log(applyDiscount(20,'SAVE10'));
+`;
+let users=LS.get('cm_users',{}),user=LS.get('cm_session',null),D=null,view='editor',aiOut={};
+const save=()=>{if(user)LS.set('cm_data_'+user,D)};
+const P=()=>D.projects.find(p=>p.id===D.ap)||D.projects[0];
+const F=()=>{const p=P();return p&&(p.files.find(f=>f.id===D.af)||p.files[0])};
+const track=(t)=>{D.ev.push({t:Date.now(),k:t});if(D.ev.length>500)D.ev.shift();save()};
+const lang=n=>/\.py$/.test(n)?'python':/\.(js|ts|jsx)$/.test(n)?'javascript':/\.java$/.test(n)?'java':'code';
+/* ---------- analyzer ---------- */
+function analyze(code){
+ const L=code.split('\n');let blank=0,com=0;
+ L.forEach(l=>{const t=l.trim();if(!t)blank++;else if(/^(\/\/|#|\/\*|\*)/.test(t))com++});
+ const loc=L.length-blank-com;
+ const s=code.replace(/\/\*[\s\S]*?\*\//g,'').replace(/(\/\/|#).*$/gm,'').replace(/(["'`])(?:\\.|(?!\1).)*\1/g,'""');
+ const cc=1+(s.match(/\b(if|for|while|case|catch|elif|except)\b|&&|\|\||\band\b|\bor\b|\?(?!\?)/g)||[]).length;
+ const fns=[...s.matchAll(/function\s*\*?\s*([A-Za-z_$][\w$]*)|\bdef\s+([A-Za-z_]\w*)|(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>/g)].map(m=>m[1]||m[2]||m[3]);
+ let d=0,mx=0;for(const c of s){if(c=='{'){d++;mx=Math.max(mx,d)}else if(c=='}')d--}
+ if(!mx)L.forEach(l=>{const i=(l.match(/^\s*/)[0].length/4)|0;mx=Math.max(mx,i)});
+ const tk=s.match(/[A-Za-z_$][\w$]*|\d+|[^\s\w]/g)||[],u=new Set(tk).size,V=Math.max(1,tk.length*Math.log2(Math.max(2,u)));
+ const mi=Math.round(Math.max(0,Math.min(100,(171-5.2*Math.log(V)-.23*cc-16.2*Math.log(Math.max(1,loc)))*100/171)));
+ const is=[],add=(sev,m)=>is.push({sev,m});
+ L.forEach((l,i)=>{const n=i+1;
+  if(/\bvar\s/.test(l))add('wa',`Line ${n}: <code>var</code> used; prefer let/const`);
+  if(/[^=!]==[^=]|!=[^=]/.test(l.replace(/(["'])(?:\\.|(?!\1).)*\1/g,'""'))&&!/\.py/.test(''))add('wa',`Line ${n}: loose equality; prefer ===/!==`);
+  if(/\beval\(/.test(l))add('er',`Line ${n}: eval() is a security risk`);
+  if(/console\.log/.test(l))add('mu',`Line ${n}: console.log left in code`);
+  if(/TODO|FIXME/.test(l))add('mu',`Line ${n}: unresolved TODO/FIXME`);
+  if(l.length>120)add('wa',`Line ${n}: line longer than 120 characters`)});
+ if(cc>10)add('er',`High cyclomatic complexity (${cc}); split into smaller functions`);
+ if(mx>4)add('wa',`Deep nesting (${mx}); use early returns`);
+ if(loc>20&&com/Math.max(1,loc)<.05)add('wa','Very few comments for the amount of code');
+ const grade=mi>=75&&cc<=10?'A':mi>=60&&cc<=20?'B':mi>=40?'C':'D';
+ return{loc,blank,com,cc,fns,mx,mi,is,grade,lines:L.length};
+}
+/* ---------- AI ---------- */
+let smp;async function getS(){if(smp===undefined){try{smp=await claude.use('sample')}catch(e){smp=null}}return smp}
+async function ai(kind,task,code,out,fb,key){
+ track(kind);out.innerHTML='<span class="mu">Thinking…</span>';
+ const s=await getS(),prompt=`You are CodeMind AI, an expert software engineering assistant. Respond in concise Markdown. ${task}\n\nLanguage: ${lang(F().name)}\n\n${code?'Code:\n```\n'+code+'\n```':''}`;
+ let txt;
+ if(s){try{const r=await s(prompt,{onText:({text})=>{out.innerHTML=md(text)},cache:false});txt=r.text;out.innerHTML=md(txt)}catch(e){txt=null}}
+ if(!txt){txt=fb();out.innerHTML=md(txt)+'<p class="mu">Offline heuristic mode: AI model unavailable in this view.</p>'}
+ aiOut[kind]=txt;return txt;
+}
+const firstCode=t=>{const m=(t||'').match(/```[^\n]*\n([\s\S]*?)```/);return m?m[1]:t||''};
+async function dl(name,data){try{const d=await claude.use('downloads');if(d){await d.save({filename:name,data});return}}catch(e){if(e&&e.code==='declined')return}
+ try{await navigator.clipboard.writeText(data);alert('Download unavailable here; content copied to clipboard.')}catch(e){alert('Download unavailable in this view.')}}
+/* ---------- shell ---------- */
+const NAV=[['editor','⌨️','Code Editor'],['gen','✨','Code Generation'],['debug','🐞','Debugging'],['explain','💡','Explain & Summarize'],['tests','🧪','Test Generator'],['quality','📏','Quality Analyzer'],['projects','📁','Projects & Files'],['docs','📄','Documentation'],['dash','📊','Analytics'],['profile','👤','Profile']];
+function applyTheme(){const t=D&&D.prof.theme;if(t&&t!=='auto')document.documentElement.dataset.theme=t;else delete document.documentElement.dataset.theme}
+function render(){const r=$('#root');
+ if(!user){authView(r);return}
+ applyTheme();
+ r.innerHTML=`<div class="app"><nav><h1>🧠 CodeMind AI</h1><small>Intelligent Engineering Workspace</small>${NAV.map(n=>`<a data-v="${n[0]}" class="${view===n[0]?'on':''}">${n[1]} ${n[2]}</a>`).join('')}<a id="lo">🚪 Sign out</a></nav><main id="m"></main></div>`;
+ r.querySelectorAll('nav a[data-v]').forEach(a=>a.onclick=()=>{view=a.dataset.v;render()});
+ $('#lo').onclick=()=>{user=null;LS.set('cm_session',null);D=null;render()};
+ ({editor:edView,gen:genView,debug:dbgView,explain:expView,tests:tstView,quality:qualView,projects:prjView,docs:docView,dash:dashView,profile:profView})[view]($('#m'));
+}
+/* banner art + header */
+function art(){return`<svg viewBox="0 0 300 100" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+<circle cx="250" cy="20" r="44" fill="#fff" opacity=".12"/><circle cx="170" cy="92" r="34" fill="#fff" opacity=".10"/>
+<g class="fl2"><rect x="196" y="22" width="86" height="58" rx="9" fill="#0b1020" opacity=".55"/>
+<circle cx="207" cy="33" r="3" fill="#ff5f57"/><circle cx="217" cy="33" r="3" fill="#febc2e"/><circle cx="227" cy="33" r="3" fill="#28c840"/>
+<rect x="206" y="44" width="40" height="4" rx="2" fill="#7c86ff"/><rect x="214" y="53" width="56" height="4" rx="2" fill="#ec4899"/>
+<rect x="214" y="62" width="30" height="4" rx="2" fill="#34d399"/></g>
+<text x="130" y="62" font-size="40" font-family="ui-monospace,monospace" font-weight="700" fill="#fff" opacity=".25">&lt;/&gt;</text></svg>`}
+const HUE={editor:'#5560f0,#8b5cf6,#ec4899',gen:'#7c3aed,#db2777,#f59e0b',debug:'#dc2626,#f97316,#facc15',explain:'#0ea5e9,#6366f1,#a855f7',tests:'#059669,#10b981,#06b6d4',quality:'#2563eb,#7c3aed,#ec4899',projects:'#f59e0b,#ef4444,#ec4899',docs:'#0891b2,#3b82f6,#8b5cf6',dash:'#4f46e5,#9333ea,#ec4899',profile:'#64748b,#6366f1,#8b5cf6'};
+function head(t,s){return`<div class="hero" style="background:linear-gradient(120deg,${HUE[view]||HUE.editor})"><div><h2>${t}</h2><p class="sub">${s}</p></div>${art()}</div>`}
+function codeBar(){const f=F();return`<div class="row"><span class="tag">${esc(P().name)} / ${esc(f.name)}</span><span class="mu">${f.code.split('\n').length} lines · using the code in the editor</span></div>`}
+/* 1 auth */
+function authView(r){let mode='in';
+ const draw=()=>{r.innerHTML=`<div class="auth card"><svg class="authart" viewBox="0 0 400 120"><defs><linearGradient id="ag1" x1="0" x2="1"><stop offset="0" stop-color="#5560f0"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs><rect width="400" height="120" rx="14" fill="url(#ag1)"/><circle cx="330" cy="30" r="50" fill="#fff" opacity=".13"/><text x="28" y="76" font-size="54" font-family="ui-monospace,monospace" font-weight="700" fill="#fff">{ AI }</text><g class="fl2"><rect x="250" y="38" width="110" height="56" rx="9" fill="#0b1020" opacity=".55"/><rect x="262" y="52" width="50" height="5" rx="2" fill="#7c86ff"/><rect x="270" y="64" width="70" height="5" rx="2" fill="#f9a8d4"/><rect x="262" y="76" width="36" height="5" rx="2" fill="#34d399"/></g></svg><h2>🧠 CodeMind AI</h2><p class="sub">Intelligent Engineering Workspace</p><div class="tabs"><button class="${mode==='in'?'':'g'}" id="t1">Sign in</button><button class="${mode==='up'?'':'g'}" id="t2">Create account</button></div>${mode==='up'?'<label>Full name</label><input id="nm">':''}<label>Email</label><input id="em" type="email" autocomplete="username"><label>Password</label><input id="pw" type="password" autocomplete="current-password"><p id="er" class="er"></p><button id="go" style="width:100%">${mode==='in'?'Sign in':'Create account'}</button><p class="mu" style="font-size:12px">Accounts are stored locally in this browser only.</p></div>`;
+  $('#t1').onclick=()=>{mode='in';draw()};$('#t2').onclick=()=>{mode='up';draw()};
+  $('#go').onclick=async()=>{const em=$('#em').value.trim().toLowerCase(),pw=$('#pw').value,er=$('#er');
+   if(!/^\S+@\S+\.\S+$/.test(em))return er.textContent='Enter a valid email.';
+   if(pw.length<6)return er.textContent='Password must be at least 6 characters.';
+   const h=await sha(pw);
+   if(mode==='up'){if(users[em])return er.textContent='Account already exists.';users[em]={h,name:$('#nm').value.trim()||em.split('@')[0]};LS.set('cm_users',users);
+     const fid=uid(),pid=uid();LS.set('cm_data_'+em,{prof:{name:users[em].name,role:'Software Engineer',bio:'',theme:'auto'},projects:[{id:pid,name:'Demo Project',files:[{id:fid,name:'cart.js',code:SAMPLE}]}],ap:pid,af:fid,ev:[],an:[]})}
+   else if(!users[em]||users[em].h!==h)return er.textContent='Invalid email or password.';
+   user=em;LS.set('cm_session',em);D=LS.get('cm_data_'+em);render()}};
+ draw()}
+/* 2 editor */
+function edView(m){const f=F();
+ m.innerHTML=head('Intelligent Code Editor','Line numbers, auto-close brackets, smart indent, live status, find, and in-browser JavaScript runner.')+`<div class="row" style="margin-bottom:8px"><select id="fs" class="grow">${P().files.map(x=>`<option value="${x.id}" ${x.id===f.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select><input id="fd" placeholder="Find…" style="width:150px"><button class="g" id="fb">Find next</button><button id="run">▶ Run JS</button><button class="g" id="an">Analyze</button><button class="g" id="dw">Download</button></div><div class="ed"><div class="ln" id="ln"></div><textarea id="ta" spellcheck="false"></textarea></div><div class="row mu" style="margin-top:6px"><span id="st"></span><span id="lt"></span></div><div class="out" id="co" style="min-height:60px">Console output appears here.</div>`;
+ const ta=$('#ta'),ln=$('#ln'),st=$('#st');ta.value=f.code;
+ const upd=()=>{const n=ta.value.split('\n').length;ln.textContent=Array.from({length:n},(_,i)=>i+1).join('\n');const b=ta.value.slice(0,ta.selectionStart).split('\n');st.textContent=`Ln ${b.length}, Col ${b[b.length-1].length+1} · ${ta.value.length} chars · ${lang(f.name)}`;
+  let o=0,c=0;for(const ch of ta.value.replace(/(["'`])(?:\\.|(?!\1).)*\1/g,'')){if('([{'.includes(ch))o++;if(')]}'.includes(ch))c++}$('#lt').innerHTML=o===c?'<span class="ok">✓ brackets balanced</span>':'<span class="er">✗ unbalanced brackets</span>'};
+ let t;ta.oninput=()=>{f.code=ta.value;upd();clearTimeout(t);t=setTimeout(save,400)};
+ ta.onscroll=()=>ln.scrollTop=ta.scrollTop;ta.onclick=ta.onkeyup=upd;
+ ta.onkeydown=e=>{const s=ta.selectionStart,v=ta.value,pairs={'(':')','[':']','{':'}','"':'"',"'":"'"};
+  const set=(txt,p)=>{ta.setRangeText(txt,s,ta.selectionEnd,'end');ta.selectionStart=ta.selectionEnd=p;ta.oninput()};
+  if(e.key==='Tab'){e.preventDefault();set('  ',s+2)}
+  else if(pairs[e.key]&&s===ta.selectionEnd){e.preventDefault();set(e.key+pairs[e.key],s+1)}
+  else if(e.key==='Enter'){const ls=v.lastIndexOf('\n',s-1)+1,ind=v.slice(ls,s).match(/^\s*/)[0],extra=/[{(\[]\s*$/.test(v.slice(ls,s))?'  ':'';e.preventDefault();set('\n'+ind+extra,s+1+ind.length+extra.length)}};
+ $('#fs').onchange=e=>{D.af=e.target.value;save();render()};
+ $('#fb').onclick=()=>{const q=$('#fd').value;if(!q)return;let i=ta.value.indexOf(q,ta.selectionEnd);if(i<0)i=ta.value.indexOf(q);if(i<0)return;ta.focus();ta.setSelectionRange(i,i+q.length)};
+ $('#dw').onclick=()=>dl(f.name,f.code);
+ $('#an').onclick=()=>{view='quality';render()};
+ $('#run').onclick=()=>{track('run');const out=$('#co'),logs=[],fake={log:(...a)=>logs.push(a.map(x=>typeof x==='object'?JSON.stringify(x):String(x)).join(' ')),error:(...a)=>logs.push('ERR '+a.join(' ')),warn:(...a)=>logs.push('WARN '+a.join(' '))};
+  try{new Function('console',ta.value)(fake);out.innerHTML='<pre>'+esc(logs.join('\n')||'(no output)')+'</pre>'}catch(e){out.innerHTML=`<pre class="er">${esc(logs.join('\n'))}\n${esc(e.name+': '+e.message)}</pre>`+(e instanceof EvalError?'<p class="mu">Code evaluation is blocked in this hosted view.</p>':'')}};
+ upd();
+}
+/* 3 generation */
+function genView(m){
+ m.innerHTML=head('AI-Based Code Generation','Describe what you need; CodeMind writes it. Insert the result straight into your file.')+`<div class="card"><label>Describe the code</label><textarea id="pr" rows="4" placeholder="e.g. A function that debounces another function, with unit-test-friendly design"></textarea><div class="row" style="margin-top:10px"><select id="lg"><option>JavaScript</option><option>Python</option><option>Java</option><option>TypeScript</option><option>C++</option></select><button id="go">Generate</button><button class="g" id="ins">Insert into editor</button><button class="g" id="ap">Append to file</button></div><div class="out" id="o">${aiOut.gen?md(aiOut.gen):'Result appears here.'}</div></div>`;
+ $('#go').onclick=()=>{const p=$('#pr').value.trim();if(!p)return;ai('gen',`Write production-quality ${$('#lg').value} code for the request below. Return one code block, then a brief note on usage.\nRequest: ${p}`,'',$('#o'),()=>`\`\`\`\n// TODO: ${p}\n// AI model unavailable; scaffold only\nfunction main() {\n  // implement: ${p}\n}\n\`\`\``)};
+ $('#ins').onclick=()=>{if(!aiOut.gen)return;F().code=firstCode(aiOut.gen);save();view='editor';render()};
+ $('#ap').onclick=()=>{if(!aiOut.gen)return;F().code+='\n\n'+firstCode(aiOut.gen);save();view='editor';render()};
+}
+/* 4 debug */
+function dbgView(m){
+ m.innerHTML=head('AI-Powered Debugging','Finds likely bugs, explains errors in plain language, and proposes a fix.')+`<div class="card">${codeBar()}<label>Error message or symptom (optional)</label><textarea id="er" rows="3" placeholder="TypeError: Cannot read properties of undefined…"></textarea><div class="row" style="margin-top:10px"><button id="go">Debug</button><button class="g" id="ap">Apply fixed code to file</button></div><div class="out" id="o">${aiOut.debug?md(aiOut.debug):'Diagnosis appears here.'}</div></div>`;
+ $('#go').onclick=()=>{const code=F().code,er=$('#er').value.trim();ai('debug',`Debug this code. ${er?'Reported error: '+er+'. ':''}Explain root cause simply, list each bug with line numbers, then give the full corrected code in one code block.`,code,$('#o'),()=>{let r='## Static diagnosis\n';try{new Function(code);r+='- Syntax check passed.\n'}catch(e){r+='- **Syntax problem:** '+e.message+'\n'}
+  const a=analyze(code);a.is.filter(i=>i.sev!=='mu').forEach(i=>r+='- '+i.m.replace(/<\/?code>/g,'`')+'\n');if(er)r+='\n**Reported error:** '+er+'\nCheck the variable named in the message for null/undefined values and confirm it is defined before use.';return r})};
+ $('#ap').onclick=()=>{if(!aiOut.debug)return;F().code=firstCode(aiOut.debug);save();view='editor';render()};
+}
+/* 5 explain */
+function expView(m){
+ m.innerHTML=head('Code Explanation & Summarization','Understand any file: line-level walkthrough or a short summary.')+`<div class="card">${codeBar()}<div class="row" style="margin-top:10px"><select id="md"><option value="sum">Short summary</option><option value="step">Step-by-step walkthrough</option><option value="eli">Explain for a beginner</option></select><button id="go">Explain</button></div><div class="out" id="o">${aiOut.explain?md(aiOut.explain):'Explanation appears here.'}</div></div>`;
+ $('#go').onclick=()=>{const code=F().code,a=analyze(code),md_=$('#md').value;
+  ai('explain',{sum:'Summarize what this code does in under 120 words, then list inputs and outputs.',step:'Explain this code step by step, referencing line numbers.',eli:'Explain this code to a beginner using an analogy.'}[md_],code,$('#o'),()=>`## Summary\n- ${a.loc} lines of code, ${a.fns.length} function(s): ${a.fns.join(', ')||'none'}\n- Cyclomatic complexity ${a.cc}, max nesting ${a.mx}\n- Comments: ${a.com}`)};
+}
+/* 6 tests */
+function tstView(m){
+ m.innerHTML=head('Automated Test Case Generation','Generates unit tests covering normal, edge, and error cases.')+`<div class="card">${codeBar()}<div class="row" style="margin-top:10px"><select id="fw"><option>Jest</option><option>Vitest</option><option>pytest</option><option>JUnit</option></select><button id="go">Generate tests</button><button class="g" id="nf">Save as new file</button></div><div class="out" id="o">${aiOut.tests?md(aiOut.tests):'Tests appear here.'}</div></div>`;
+ $('#go').onclick=()=>{const code=F().code,a=analyze(code),fw=$('#fw').value;ai('tests',`Write ${fw} unit tests for this code covering happy path, edge cases, invalid input and boundaries. Return a single code block, then list what is covered.`,code,$('#o'),()=>`\`\`\`\n${a.fns.map(n=>`describe('${n}', () => {\n  test('returns expected result for typical input', () => { /* arrange, act, assert */ });\n  test('handles empty or null input', () => {});\n  test('handles boundary values', () => {});\n});`).join('\n\n')||'// no functions detected'}\n\`\`\``)};
+ $('#nf').onclick=()=>{if(!aiOut.tests)return;const n=F().name.replace(/\.(\w+)$/,'.test.$1'),id=uid();P().files.push({id,name:n,code:firstCode(aiOut.tests)});D.af=id;save();view='editor';render()};
+}
+/* 7 quality */
+function qualView(m){const f=F(),a=analyze(f.code),col=a.grade==='A'?'ok':a.grade==='B'?'wa':'er';
+ m.innerHTML=head('Code Quality & Complexity Analyzer','Static metrics and issues for the active file.')+`<div class="card">${codeBar()}<div class="grid" style="margin-top:10px"><div class="kpi card"><b class="${col}">${a.grade}</b><span>Overall grade</span></div><div class="kpi card"><b>${a.mi}</b><span>Maintainability (0-100)</span></div><div class="kpi card"><b>${a.cc}</b><span>Cyclomatic complexity</span></div><div class="kpi card"><b>${a.loc}</b><span>Logical lines of code</span></div><div class="kpi card"><b>${a.mx}</b><span>Max nesting depth</span></div><div class="kpi card"><b>${a.com}</b><span>Comment lines</span></div></div><p><b>Functions (${a.fns.length}):</b> ${a.fns.map(x=>`<code>${esc(x)}</code>`).join(' ')||'<span class="mu">none detected</span>'}</p><h3>Issues (${a.is.length})</h3>${a.is.length?a.is.map(i=>`<div class="${i.sev}">• ${i.m}</div>`).join(''):'<span class="ok">No issues found 🎉</span>'}<div class="row" style="margin-top:12px"><button id="sv">Save snapshot to analytics</button><button class="g" id="fx">Ask AI to refactor</button></div><div class="out" id="o" style="display:none"></div></div>`;
+ $('#sv').onclick=()=>{D.an.push({t:Date.now(),f:f.name,loc:a.loc,cc:a.cc,mi:a.mi});save();$('#sv').textContent='Saved ✓'};
+ $('#fx').onclick=()=>{const o=$('#o');o.style.display='block';ai('refactor',`Refactor this code to reduce complexity and fix these issues: ${a.is.map(i=>i.m.replace(/<\/?code>/g,'')).join('; ')}. Return improved code in one block and explain the changes.`,f.code,o,()=>'## Suggestions\n- Replace `var` with `let`/`const`.\n- Use strict equality.\n- Extract repeated conditions; use early returns.')};
+}
+/* 8 projects */
+function prjView(m){
+ m.innerHTML=head('Project & File Management','Organize projects and files. Everything is saved automatically to your account.')+`<div class="grid" style="grid-template-columns:1fr 1.4fr;align-items:start"><div class="card"><h3>Projects</h3>${D.projects.map(p=>`<div class="fl ${p.id===P().id?'on':''}"><a data-p="${p.id}" style="cursor:pointer;flex:1">${esc(p.name)} <span class="mu">(${p.files.length})</span></a><button class="g" data-rp="${p.id}">✎</button><button class="d" data-dp="${p.id}">✕</button></div>`).join('')}<div class="row" style="margin-top:8px"><input id="np" class="grow" placeholder="New project name"><button id="ap">Add</button></div></div><div class="card"><h3>Files in ${esc(P().name)}</h3>${P().files.map(f=>`<div class="fl ${f.id===F().id?'on':''}"><a data-f="${f.id}" style="cursor:pointer;flex:1">${esc(f.name)} <span class="mu">${f.code.split('\n').length} lines</span></a><button class="g" data-rf="${f.id}">✎</button><button class="g" data-df="${f.id}">⬇</button><button class="d" data-xf="${f.id}">✕</button></div>`).join('')||'<span class="mu">No files yet.</span>'}<div class="row" style="margin-top:8px"><input id="nf" class="grow" placeholder="filename.js"><button id="af">Add file</button></div></div></div>`;
+ const on=(s,fn)=>m.querySelectorAll(s).forEach(e=>e.onclick=()=>fn(e));
+ on('[data-p]',e=>{D.ap=e.dataset.p;D.af=P().files[0]?.id;save();render()});
+ on('[data-f]',e=>{D.af=e.dataset.f;save();view='editor';render()});
+ on('[data-rp]',e=>{const p=D.projects.find(x=>x.id===e.dataset.rp),n=prompt('Rename project',p.name);if(n){p.name=n;save();render()}});
+ on('[data-rf]',e=>{const f=P().files.find(x=>x.id===e.dataset.rf),n=prompt('Rename file',f.name);if(n){f.name=n;save();render()}});
+ on('[data-df]',e=>{const f=P().files.find(x=>x.id===e.dataset.df);dl(f.name,f.code)});
+ on('[data-dp]',e=>{if(D.projects.length<2)return alert('Keep at least one project.');if(confirm('Delete this project and its files?')){D.projects=D.projects.filter(x=>x.id!==e.dataset.dp);D.ap=D.projects[0].id;D.af=D.projects[0].files[0]?.id;save();render()}});
+ on('[data-xf]',e=>{if(P().files.length<2)return alert('Keep at least one file in the project.');if(confirm('Delete file?')){P().files=P().files.filter(x=>x.id!==e.dataset.xf);D.af=P().files[0].id;save();render()}});
+ $('#ap').onclick=()=>{const n=$('#np').value.trim();if(!n)return;const fid=uid(),pid=uid();D.projects.push({id:pid,name:n,files:[{id:fid,name:'main.js',code:'// '+n+'\n'}]});D.ap=pid;D.af=fid;save();render()};
+ $('#af').onclick=()=>{const n=$('#nf').value.trim();if(!n)return;const id=uid();P().files.push({id,name:n,code:''});D.af=id;save();render()};
+}
+/* 9 docs */
+function docView(m){
+ m.innerHTML=head('AI-Based Documentation Generator','Creates README-style docs with API reference and usage examples.')+`<div class="card">${codeBar()}<div class="row" style="margin-top:10px"><select id="ty"><option value="README">README</option><option value="API reference">API reference</option><option value="Docstrings / JSDoc">Inline docstrings</option></select><button id="go">Generate</button><button class="g" id="dw">Download .md</button></div><div class="out" id="o">${aiOut.docs?md(aiOut.docs):'Documentation appears here.'}</div></div>`;
+ $('#go').onclick=()=>{const f=F(),a=analyze(f.code);ai('docs',`Write ${$('#ty').value} documentation for this code: overview, install/usage, each function with parameters and return values, and an example.`,f.code,$('#o'),()=>`# ${f.name}\n\n## Overview\nContains ${a.fns.length} function(s), ${a.loc} lines of code.\n\n## API\n${a.fns.map(n=>`### \`${n}\`\nDescribe parameters and return value.`).join('\n\n')}`)};
+ $('#dw').onclick=()=>{if(aiOut.docs)dl(F().name.replace(/\.\w+$/,'')+'-docs.md',aiOut.docs)};
+}
+/* 10 dashboard */
+const PAL=['#5560f0','#ec4899','#f59e0b','#10b981','#06b6d4','#8b5cf6','#ef4444'];
+function donut(data){const t=data.reduce((s,d)=>s+d[1],0);if(!t)return'<p class="mu">No AI usage yet. Try Generate or Debug!</p>';
+ const C=2*Math.PI*50;let off=0;
+ const seg=data.map((d,i)=>{const l=d[1]/t*C,s=`<circle cx="70" cy="70" r="50" fill="none" stroke="${PAL[i%7]}" stroke-width="18" stroke-linecap="round" stroke-dasharray="${Math.max(0,l-4)} ${C-l+4}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`;off+=l;return s}).join('');
+ return`<div class="row" style="justify-content:center"><svg viewBox="0 0 140 140" style="width:170px"><circle cx="70" cy="70" r="50" fill="none" stroke="var(--cd)" stroke-width="18"/>${seg}<text x="70" y="70" text-anchor="middle" font-size="26" font-weight="700" fill="var(--tx)">${t}</text><text x="70" y="86" text-anchor="middle" font-size="9" fill="var(--mu)">total uses</text></svg><div class="leg" style="flex-direction:column">${data.map((d,i)=>`<em style="--c:${PAL[i%7]}">${esc(d[0])} <b>${d[1]}</b></em>`).join('')}</div></div>`}
+function area(data,color='#10b981',id='a1'){const w=520,h=150,n=data.length,mx=Math.max(1,...data.map(d=>d[1]));
+ const p=data.map((d,i)=>[i*(w/Math.max(1,n-1)),h-d[1]/mx*h*.8-6]);
+ const line=p.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+ return`<svg viewBox="-12 0 ${w+24} ${h+26}" style="width:100%"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:${color};stop-opacity:.55"/><stop offset="1" style="stop-color:${color};stop-opacity:0"/></linearGradient></defs>
+ ${[.25,.5,.75].map(g=>`<line x1="0" x2="${w}" y1="${h*g}" y2="${h*g}" stroke="var(--bd)" stroke-dasharray="4 4"/>`).join('')}
+ <path d="${line} L${w} ${h} L0 ${h} Z" fill="url(#${id})"/><path d="${line}" fill="none" stroke="${color}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+ ${p.map((q,i)=>`<circle cx="${q[0]}" cy="${q[1]}" r="4.5" fill="var(--sf)" stroke="${color}" stroke-width="2.5"/><text x="${q[0]}" y="${q[1]-10}" text-anchor="middle" font-size="10" fill="var(--tx)">${data[i][1]}</text><text x="${q[0]}" y="${h+18}" text-anchor="middle" font-size="10" fill="var(--mu)">${esc(data[i][0])}</text>`).join('')}</svg>`}
+function gauge(v,label){const c=v>=75?'#10b981':v>=50?'#f59e0b':'#ef4444',L=Math.PI*60;
+ return`<svg viewBox="0 0 140 96" style="width:100%;max-width:240px;display:block;margin:auto"><path d="M10 80 A60 60 0 0 1 130 80" fill="none" stroke="var(--cd)" stroke-width="14" stroke-linecap="round"/><path d="M10 80 A60 60 0 0 1 130 80" fill="none" stroke="${c}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${v/100*L} ${L}"/><text x="70" y="70" text-anchor="middle" font-size="26" font-weight="700" fill="var(--tx)">${v}</text><text x="70" y="88" text-anchor="middle" font-size="9" fill="var(--mu)">${esc(label)}</text></svg>`}
+function kc(i,v,l,g){return`<div class="kc" style="background:linear-gradient(135deg,${g})"><i>${i}</i><b>${v}</b><span>${l}</span></div>`}
+function dashView(m){
+ const files=D.projects.flatMap(p=>p.files.map(f=>({p:p.name,f:f.name,a:analyze(f.code)}))),A=files.map(x=>x.a),loc=A.reduce((s,a)=>s+a.loc,0),mi=A.length?Math.round(A.reduce((s,a)=>s+a.mi,0)/A.length):0,iss=A.reduce((s,a)=>s+a.is.length,0);
+ const names={gen:'Generate',debug:'Debug',explain:'Explain',tests:'Tests',docs:'Docs',refactor:'Refactor',run:'Runs'},cnt={};D.ev.forEach(e=>cnt[e.k]=(cnt[e.k]||0)+1);
+ const days=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);return[d.toLocaleDateString(undefined,{weekday:'short'}),D.ev.filter(e=>new Date(e.t).toDateString()===d.toDateString()).length]});
+ const gc={A:'#10b981',B:'#f59e0b',C:'#f97316',D:'#ef4444'};
+ m.innerHTML=head('Engineering Analytics Dashboard','Live insight across your projects, code health, and AI usage.')+
+ `<div class="grid" style="margin-bottom:14px">${kc('📁',D.projects.length,'Projects','#5560f0,#8b5cf6')+kc('📄',files.length,'Files','#0ea5e9,#6366f1')+kc('⌨️',loc,'Lines of code','#10b981,#06b6d4')+kc('🐞',iss,'Issues found','#f97316,#ef4444')+kc('🤖',D.ev.filter(e=>e.k!=='run').length,'AI requests','#ec4899,#8b5cf6')}</div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+ <div class="card"><h3>🍩 Feature usage</h3>${donut(Object.entries(cnt).map(([k,v])=>[names[k]||k,v]))}</div>
+ <div class="card"><h3>🩺 Code health</h3>${gauge(mi,'avg maintainability')}</div></div>
+ <div class="card"><h3>📈 Activity, last 7 days</h3>${area(days)}</div>
+ <div class="card"><h3>📊 Per-file health</h3>${files.map(x=>`<div class="frow"><span title="${esc(x.p)}/${esc(x.f)}" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(x.f)}</span><div class="pb"><div style="width:${x.a.mi}%;background:linear-gradient(90deg,${gc[x.a.grade]},${gc[x.a.grade]}aa)"></div></div><span><b style="color:${gc[x.a.grade]}">${x.a.grade}</b> · ${x.a.mi}</span></div>`).join('')}</div>
+ <div class="card"><h3>✨ Quality trend (saved snapshots)</h3>${D.an.length>1?area(D.an.slice(-8).map(x=>[x.f.slice(0,7),x.mi]),'#7c86ff','a2'):'<p class="mu">Save 2+ snapshots from the Quality Analyzer to see your trend.</p>'}</div>`;
+}
+/* 1b profile */
+function profView(m){const p=D.prof;
+ m.innerHTML=head('Profile','Manage your account details and appearance.')+`<div class="card" style="max-width:520px"><label>Email</label><input value="${esc(user)}" disabled><label>Name</label><input id="n" value="${esc(p.name)}"><label>Role</label><input id="r" value="${esc(p.role)}"><label>Bio</label><textarea id="b" rows="3">${esc(p.bio)}</textarea><label>Theme</label><select id="th">${['auto','light','dark'].map(x=>`<option ${p.theme===x?'selected':''}>${x}</option>`).join('')}</select><div class="row" style="margin-top:12px"><button id="s">Save profile</button><span id="ok" class="ok"></span></div></div><div class="card" style="max-width:520px"><h3>Change password</h3><label>New password</label><input id="pw" type="password"><div class="row" style="margin-top:10px"><button class="g" id="cp">Update password</button><span id="pm"></span></div></div>`;
+ $('#s').onclick=()=>{Object.assign(p,{name:$('#n').value,role:$('#r').value,bio:$('#b').value,theme:$('#th').value});users[user].name=p.name;LS.set('cm_users',users);save();applyTheme();$('#ok').textContent='Saved ✓'};
+ $('#cp').onclick=async()=>{const v=$('#pw').value;if(v.length<6)return $('#pm').textContent='Min 6 characters.';users[user].h=await sha(v);LS.set('cm_users',users);$('#pm').textContent='Updated ✓'};
+}
+if(user){D=LS.get('cm_data_'+user,null);if(!D){user=null}}
+render();
+</script></body></html>
